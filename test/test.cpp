@@ -10,6 +10,7 @@ auto test_u8() -> void {
     assert(u8{1} + u8{1} == u8{2});
     {
         auto n = u8{0};
+        // NOLINTNEXTLINE
         n += u8{1};
         assert(n == u8{1});
     }
@@ -17,6 +18,7 @@ auto test_u8() -> void {
     assert(u8{1} - u8{1} == u8{0});
     {
         auto n = u8{1};
+        // NOLINTNEXTLINE
         n -= u8{1};
         assert(n == u8{0});
     }
