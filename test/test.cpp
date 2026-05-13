@@ -71,7 +71,15 @@ auto test_integer() -> void {
         assert(n == T{0b0110});
     }
 
-    assert(~T{0b00000000} == T{0b11111111});
+    if constexpr (std::is_same_v<T, xtd::u8>) {
+        assert(~T{0x00} == T{0xff});
+    } else if constexpr (std::is_same_v<T, xtd::u16>) {
+        assert(~T{0x0000} == T{0xffff});
+    } else if constexpr (std::is_same_v<T, xtd::u32>) {
+        assert(~T{0x00000000} == T{0xffffffff});
+    } else if constexpr (std::is_same_v<T, xtd::u64>) {
+        assert(~T{0x0000000000000000} == T{0xffffffffffffffff});
+    }
 
     assert(T{0b01} << T{1} == T{0b10});
     {
@@ -104,4 +112,7 @@ auto test_integer() -> void {
 
 auto main() -> int {
     test_integer<xtd::u8>();
+    test_integer<xtd::u16>();
+    test_integer<xtd::u32>();
+    test_integer<xtd::u64>();
 }

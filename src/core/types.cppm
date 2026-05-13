@@ -110,4 +110,7 @@ namespace xtd {
     };
 
     export using u8 = integer<unsigned char>;
+    export using u16 = integer<unsigned short int>;
+    export using u32 = integer<unsigned int>;
+    export using u64 = integer<unsigned long int>;
 }
