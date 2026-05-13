@@ -7,15 +7,6 @@ namespace xtd {
         u8() = default;
         explicit u8(const unsigned char inner): inner{inner} {}
 
-
-        static consteval auto MIN() -> u8 {
-            return u8{0};
-        }
-
-        static consteval auto MAX() -> u8 {
-            return u8{255};
-        }
-
         auto operator==(const u8& rhs) const -> bool {
             return this->inner == rhs.inner;
         }
