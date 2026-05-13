@@ -1,99 +1,107 @@
 #include <cassert>
 
 import xtd;
+import std;
 
-auto test_u8() -> void {
-    using xtd::u8;
+template<typename T>
+auto test_integer() -> void {
+    assert(T{} == T{0});
 
-    assert(u8{} == u8{0});
-
-    assert(u8{1} + u8{1} == u8{2});
+    assert(T{1} + T{1} == T{2});
     {
-        auto n = u8{0};
+        auto n = T{0};
         // NOLINTNEXTLINE
-        n += u8{1};
-        assert(n == u8{1});
+        n += T{1};
+        assert(n == T{1});
     }
 
-    assert(u8{1} - u8{1} == u8{0});
+    assert(T{1} - T{1} == T{0});
     {
-        auto n = u8{1};
+        auto n = T{1};
         // NOLINTNEXTLINE
-        n -= u8{1};
-        assert(n == u8{0});
+        n -= T{1};
+        assert(n == T{0});
     }
 
-    assert(u8{2} * u8{2} == u8{4});
+    assert(T{2} * T{2} == T{4});
     {
-        auto n = u8{2};
-        n *= u8{2};
-        assert(n == u8{4});
+        auto n = T{2};
+        // NOLINTNEXTLINE
+        n *= T{2};
+        assert(n == T{4});
     }
 
-    assert(u8{4} / u8{2} == u8{2});
+    assert(T{4} / T{2} == T{2});
     {
-        auto n = u8{4};
-        n /= u8{2};
-        assert(n == u8{2});
+        auto n = T{4};
+        // NOLINTNEXTLINE
+        n /= T{2};
+        assert(n == T{2});
     }
 
-    assert(u8{3} % u8{2} == u8{1});
+    assert(T{3} % T{2} == T{1});
     {
-        auto n = u8{3};
-        n %= u8{2};
-        assert(n == u8{1});
+        auto n = T{3};
+        // NOLINTNEXTLINE
+        n %= T{2};
+        assert(n == T{1});
     }
 
-    assert((u8{0b0011} & u8{0b0101}) == u8{0b0001});
+    assert((T{0b0011} & T{0b0101}) == T{0b0001});
     {
-        auto n = u8{0b0011};
-        n &= u8{0b0101};
-        assert(n == u8{0b0001});
+        auto n = T{0b0011};
+        // NOLINTNEXTLINE
+        n &= T{0b0101};
+        assert(n == T{0b0001});
     }
 
-    assert((u8{0b0011} | u8{0b0101}) == u8{0b0111});
+    assert((T{0b0011} | T{0b0101}) == T{0b0111});
     {
-        auto n = u8{0b0011};
-        n |= u8{0b0101};
-        assert(n == u8{0b0111});
+        auto n = T{0b0011};
+        // NOLINTNEXTLINE
+        n |= T{0b0101};
+        assert(n == T{0b0111});
     }
 
-    assert((u8{0b0011} ^ u8{0b0101}) == u8{0b0110});
+    assert((T{0b0011} ^ T{0b0101}) == T{0b0110});
     {
-        auto n = u8{0b0011};
-        n ^= u8{0b0101};
-        assert(n == u8{0b0110});
+        auto n = T{0b0011};
+        // NOLINTNEXTLINE
+        n ^= T{0b0101};
+        assert(n == T{0b0110});
     }
 
-    assert(~u8{0b00000000} == u8{0b11111111});
+    assert(~T{0b00000000} == T{0b11111111});
 
-    assert(u8{0b01} << u8{1} == u8{0b10});
+    assert(T{0b01} << T{1} == T{0b10});
     {
-        auto n = u8{0b01};
-        n <<= u8{1};
-        assert(n == u8{0b10});
+        auto n = T{0b01};
+        // NOLINTNEXTLINE
+        n <<= T{1};
+        assert(n == T{0b10});
     }
 
-    assert(u8{0b10} >> u8{1} == u8{0b01});
+    assert(T{0b10} >> T{1} == T{0b01});
     {
-        auto n = u8{0b10};
-        n >>= u8{1};
-        assert(n == u8{0b01});
-    }
-
-    {
-        auto n = u8{0};
-        n++;
-        assert(n == u8{1});
+        auto n = T{0b10};
+        // NOLINTNEXTLINE
+        n >>= T{1};
+        assert(n == T{0b01});
     }
 
     {
-        auto n = u8{1};
-        n--;
-        assert(n == u8{0});
+        auto n = T{0};
+        ++n;
+        assert(n == T{1});
+    }
+
+    {
+        auto n = T{1};
+        --n;
+        assert(n == T{0});
     }
 }
 
 auto main() -> int {
-    test_u8();
+    test_integer<xtd::u8>();
 }
