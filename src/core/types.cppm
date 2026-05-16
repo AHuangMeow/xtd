@@ -2,7 +2,7 @@ export module xtd:types;
 import :concepts;
 
 namespace xtd {
-    template<integral T>
+    template<Integral T>
     class integer {
         T inner{};
 
@@ -18,6 +18,26 @@ namespace xtd {
 
         auto operator!=(const integer &rhs) const -> bool {
             return this->inner != rhs.inner;
+        }
+
+        auto operator<(const integer &rhs) const -> bool {
+            return this->inner < rhs.inner;
+        }
+
+        auto operator<=(const integer &rhs) const -> bool {
+            return this->inner <= rhs.inner;
+        }
+
+        auto operator>(const integer &rhs) const -> bool {
+            return this->inner > rhs.inner;
+        }
+
+        auto operator>=(const integer &rhs) const -> bool {
+            return this->inner >= rhs.inner;
+        }
+
+        auto operator-() const -> integer requires Signed<T> {
+            return integer{static_cast<T>(-this->inner)};
         }
 
         auto operator+(const integer &rhs) const -> integer {
@@ -114,9 +134,9 @@ namespace xtd {
     };
 
     export using u8 = integer<unsigned char>;
-    export using u16 = integer<unsigned short int>;
+    export using u16 = integer<unsigned short>;
     export using u32 = integer<unsigned int>;
-    export using u64 = integer<unsigned long int>;
+    export using u64 = integer<unsigned long>;
 
     template<>
     struct is_integral<u8> : true_type {
@@ -132,5 +152,58 @@ namespace xtd {
 
     template<>
     struct is_integral<u64> : true_type {
+    };
+
+    template<>
+    struct is_unsigned<u8> : true_type {
+    };
+
+    template<>
+    struct is_unsigned<u16> : true_type {
+    };
+
+    template<>
+    struct is_unsigned<u32> : true_type {
+    };
+
+    template<>
+    struct is_unsigned<u64> : true_type {
+    };
+
+    export using i8 = integer<signed char>;
+    export using i16 = integer<signed short>;
+    export using i32 = integer<signed int>;
+    export using i64 = integer<signed long>;
+
+    template<>
+    struct is_integral<i8> : true_type {
+    };
+
+    template<>
+    struct is_integral<i16> : true_type {
+    };
+
+    template<>
+    struct is_integral<i32> : true_type {
+    };
+
+    template<>
+    struct is_integral<i64> : true_type {
+    };
+
+    template<>
+    struct is_signed<i8> : true_type {
+    };
+
+    template<>
+    struct is_signed<i16> : true_type {
+    };
+
+    template<>
+    struct is_signed<i32> : true_type {
+    };
+
+    template<>
+    struct is_signed<i64> : true_type {
     };
 }
