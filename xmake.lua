@@ -4,7 +4,7 @@ set_policy("build.c++.modules", true)
 
 target("core")
     set_kind("static")
-    add_files("src/core/*.cppm", {public = true})
+    add_files("src/xtd.cppm", "src/core/*.cppm", {public = true})
 
 target("test")
     set_kind("binary")

@@ -6,6 +6,7 @@ import std;
 template<typename T>
 auto test_integer() -> void {
     assert(T{} == T{0});
+    assert(T{1} != T{0});
 
     assert(T{1} + T{1} == T{2});
     {
@@ -73,15 +74,14 @@ auto test_integer() -> void {
 
     if constexpr (std::is_same_v<T, xtd::u8>) {
         assert(~T{0x00} == T{0xff});
-    }
-    if constexpr (std::is_same_v<T, xtd::u16>) {
+    } else if constexpr (std::is_same_v<T, xtd::u16>) {
         assert(~T{0x0000} == T{0xffff});
-    }
-    if constexpr (std::is_same_v<T, xtd::u32>) {
+    } else if constexpr (std::is_same_v<T, xtd::u32>) {
         assert(~T{0x00000000} == T{0xffffffff});
-    }
-    if constexpr (std::is_same_v<T, xtd::u64>) {
+    } else if constexpr (std::is_same_v<T, xtd::u64>) {
         assert(~T{0x0000000000000000} == T{0xffffffffffffffff});
+    } else {
+        static_assert(false, "unknown type");
     }
 
     assert(T{0b01} << T{1} == T{0b10});
@@ -112,6 +112,72 @@ auto test_integer() -> void {
         assert(n == T{0});
     }
 }
+
+// test_concepts
+static_assert(!xtd::integral<bool>);
+static_assert(!xtd::integral<char>);
+static_assert(xtd::integral<signed char>);
+static_assert(xtd::integral<unsigned char>);
+static_assert(xtd::integral<short>);
+static_assert(xtd::integral<unsigned short>);
+static_assert(xtd::integral<int>);
+static_assert(xtd::integral<unsigned int>);
+static_assert(xtd::integral<long>);
+static_assert(xtd::integral<unsigned long>);
+static_assert(xtd::integral<long long>);
+static_assert(xtd::integral<unsigned long long>);
+static_assert(!xtd::integral<float>);
+static_assert(!xtd::integral<double>);
+static_assert(!xtd::integral<long double>);
+
+static_assert(!xtd::integral<const bool>);
+static_assert(!xtd::integral<const char>);
+static_assert(xtd::integral<const signed char>);
+static_assert(xtd::integral<const unsigned char>);
+static_assert(xtd::integral<const short>);
+static_assert(xtd::integral<const unsigned short>);
+static_assert(xtd::integral<const int>);
+static_assert(xtd::integral<const unsigned int>);
+static_assert(xtd::integral<const long>);
+static_assert(xtd::integral<const unsigned long>);
+static_assert(xtd::integral<const long long>);
+static_assert(xtd::integral<const unsigned long long>);
+static_assert(!xtd::integral<const float>);
+static_assert(!xtd::integral<const double>);
+static_assert(!xtd::integral<const long double>);
+
+static_assert(!xtd::integral<volatile bool>);
+static_assert(!xtd::integral<volatile char>);
+static_assert(xtd::integral<volatile signed char>);
+static_assert(xtd::integral<volatile unsigned char>);
+static_assert(xtd::integral<volatile short>);
+static_assert(xtd::integral<volatile unsigned short>);
+static_assert(xtd::integral<volatile int>);
+static_assert(xtd::integral<volatile unsigned int>);
+static_assert(xtd::integral<volatile long>);
+static_assert(xtd::integral<volatile unsigned long>);
+static_assert(xtd::integral<volatile long long>);
+static_assert(xtd::integral<volatile unsigned long long>);
+static_assert(!xtd::integral<volatile float>);
+static_assert(!xtd::integral<volatile double>);
+static_assert(!xtd::integral<volatile long double>);
+
+static_assert(!xtd::integral<const volatile bool>);
+static_assert(!xtd::integral<const volatile char>);
+static_assert(xtd::integral<const volatile signed char>);
+static_assert(xtd::integral<const volatile unsigned char>);
+static_assert(xtd::integral<const volatile short>);
+static_assert(xtd::integral<const volatile unsigned short>);
+static_assert(xtd::integral<const volatile int>);
+static_assert(xtd::integral<const volatile unsigned int>);
+static_assert(xtd::integral<const volatile long>);
+static_assert(xtd::integral<const volatile unsigned long>);
+static_assert(xtd::integral<const volatile long long>);
+static_assert(xtd::integral<const volatile unsigned long long>);
+static_assert(!xtd::integral<const volatile float>);
+static_assert(!xtd::integral<const volatile double>);
+static_assert(!xtd::integral<const volatile long double>);
+// end test concepts
 
 auto main() -> int {
     test_integer<xtd::u8>();

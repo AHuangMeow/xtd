@@ -1,8 +1,8 @@
-export module xtd;
-import std;
+export module xtd:types;
+import :concepts;
 
 namespace xtd {
-    template<typename T> requires std::is_integral_v<T>
+    template<integral T>
     class integer {
         T inner{};
 
@@ -14,6 +14,10 @@ namespace xtd {
 
         auto operator==(const integer &rhs) const -> bool {
             return this->inner == rhs.inner;
+        }
+
+        auto operator!=(const integer &rhs) const -> bool {
+            return this->inner != rhs.inner;
         }
 
         auto operator+(const integer &rhs) const -> integer {
