@@ -9,6 +9,14 @@ namespace xtd {
         static constexpr bool value = false;
     };
 
+    export template<typename T, typename U>
+    struct is_same_as : false_type {
+    };
+
+    template<typename T>
+    struct is_same_as<T, T> : true_type {
+    };
+
     export template<typename T>
     struct is_integral : false_type {
     };

@@ -1,7 +1,6 @@
 #include <cassert>
 
 import xtd;
-import std;
 
 template<typename T>
 auto test_integer() -> void {
@@ -72,13 +71,13 @@ auto test_integer() -> void {
         assert(n == T{0b0110});
     }
 
-    if constexpr (std::is_same_v<T, xtd::u8>) {
+    if constexpr (xtd::is_same_as<T, xtd::u8>::value) {
         assert(~T{0x00} == T{0xff});
-    } else if constexpr (std::is_same_v<T, xtd::u16>) {
+    } else if constexpr (xtd::is_same_as<T, xtd::u16>::value) {
         assert(~T{0x0000} == T{0xffff});
-    } else if constexpr (std::is_same_v<T, xtd::u32>) {
+    } else if constexpr (xtd::is_same_as<T, xtd::u32>::value) {
         assert(~T{0x00000000} == T{0xffffffff});
-    } else if constexpr (std::is_same_v<T, xtd::u64>) {
+    } else if constexpr (xtd::is_same_as<T, xtd::u64>::value) {
         assert(~T{0x0000000000000000} == T{0xffffffffffffffff});
     } else {
         static_assert(false, "unknown type");
@@ -114,6 +113,9 @@ auto test_integer() -> void {
 }
 
 // test_concepts
+static_assert(xtd::same_as<int, int>);
+static_assert(!xtd::same_as<int, float>);
+
 static_assert(!xtd::integral<bool>);
 static_assert(!xtd::integral<char>);
 static_assert(xtd::integral<signed char>);

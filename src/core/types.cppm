@@ -117,4 +117,20 @@ namespace xtd {
     export using u16 = integer<unsigned short int>;
     export using u32 = integer<unsigned int>;
     export using u64 = integer<unsigned long int>;
+
+    template<>
+    struct is_integral<u8> : true_type {
+    };
+
+    template<>
+    struct is_integral<u16> : true_type {
+    };
+
+    template<>
+    struct is_integral<u32> : true_type {
+    };
+
+    template<>
+    struct is_integral<u64> : true_type {
+    };
 }
