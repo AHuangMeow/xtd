@@ -179,6 +179,26 @@ static_assert(xtd::integral<const volatile unsigned long long>);
 static_assert(!xtd::integral<const volatile float>);
 static_assert(!xtd::integral<const volatile double>);
 static_assert(!xtd::integral<const volatile long double>);
+
+static_assert(xtd::integral<xtd::u8>);
+static_assert(xtd::integral<xtd::u16>);
+static_assert(xtd::integral<xtd::u32>);
+static_assert(xtd::integral<xtd::u64>);
+
+static_assert(xtd::integral<const xtd::u8>);
+static_assert(xtd::integral<const xtd::u16>);
+static_assert(xtd::integral<const xtd::u32>);
+static_assert(xtd::integral<const xtd::u64>);
+
+static_assert(xtd::integral<volatile xtd::u8>);
+static_assert(xtd::integral<volatile xtd::u16>);
+static_assert(xtd::integral<volatile xtd::u32>);
+static_assert(xtd::integral<volatile xtd::u64>);
+
+static_assert(xtd::integral<const volatile xtd::u8>);
+static_assert(xtd::integral<const volatile xtd::u16>);
+static_assert(xtd::integral<const volatile xtd::u32>);
+static_assert(xtd::integral<const volatile xtd::u64>);
 // end test concepts
 
 auto main() -> int {
